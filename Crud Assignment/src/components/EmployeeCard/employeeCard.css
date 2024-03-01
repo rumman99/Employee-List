@@ -1,0 +1,55 @@
+.table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .table th,
+  .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+.deleteIcon{
+  font-size: 30px;
+  color: red;
+}
+
+.deleteIcon :hover{
+  color: rgb(112, 238, 10);
+  cursor: pointer;
+}
+
+.editIcon{
+  font-size: 30px;
+  color: #5757ff;
+}
+
+.editIcon :hover{
+  color: rgb(112, 238, 10);
+  cursor: pointer;
+}
+
+.blockIcon{
+  font-size: 30px;
+  color: #ffe657;
+}
+
+.blockIcon :hover{
+  color: rgb(112, 238, 10);
+  cursor: pointer;
+}
+
+.detailsIcon{
+  font-size: 30px;
+  color: green;
+}
+
+.detailsIcon :hover{
+  color: rgb(112, 238, 10);
+  cursor: pointer;
+}
+
+.iconHead{
+  color: rgb(202, 37, 25);
+}
+
