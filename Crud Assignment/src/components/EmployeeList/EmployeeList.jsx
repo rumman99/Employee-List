@@ -1,12 +1,12 @@
 import React from 'react';
 import EmployeeCard from '../EmployeeCard/EmployeeCard';
 
-const EmployeeList = ({allEmployee}) => {
+const EmployeeList = ({allEmployee, deleteHandler}) => {
 
 
     return (
         <div>
-            <EmployeeCard allEmployee={allEmployee}/>
+            <EmployeeCard allEmployee={allEmployee} deleteHandler={deleteHandler}/>
         </div>
     );
 };

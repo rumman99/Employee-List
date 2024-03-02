@@ -6,7 +6,7 @@ import { BiSolidDetail } from "react-icons/bi";
 import { MdOutlineHideImage } from "react-icons/md";
 import "./employeeCard.css"
 
-const EmployeeCard = ({allEmployee}) => {
+const EmployeeCard = ({allEmployee, deleteHandler}) => {
     const [details, setDetails]= useState(false);
     console.log(allEmployee);
     return (
@@ -44,12 +44,15 @@ const EmployeeCard = ({allEmployee}) => {
                     {
                         details &&<td>{employee.email}</td>
                     }
-                    <td className='detailsIcon' onClick={()=>setDetails(!details)}>
-                        {
-                            details ? <MdOutlineHideImage /> : <BiSolidDetail />
-                        }
+                    <td className='detailsIcon'> 
+                        <i onClick={()=>setDetails(!details)}>
+                            {
+                                details ? <MdOutlineHideImage /> : <BiSolidDetail />
+                            }
+                        </i>
+                        
                     </td>
-                    <td className='deleteIcon'><MdDeleteForever /></td>
+                    <td className='deleteIcon'><i onClick={()=>deleteHandler(employee.id)}><MdDeleteForever /></i></td>
                     <td className='blockIcon'><MdBlock /></td>
                     {
                         details && <td className='editIcon'><CiEdit /></td>
