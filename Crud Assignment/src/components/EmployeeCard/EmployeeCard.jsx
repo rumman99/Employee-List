@@ -5,7 +5,7 @@ import { BiSolidDetail } from "react-icons/bi";
 import { CgUnblock } from "react-icons/cg";
 import "./employeeCard.css"
 import { Link } from 'react-router-dom';
-import { Modal } from 'antd';
+import { Col, Modal, Row } from 'antd';
 
 const EmployeeCard = ({allEmployee, deleteHandler}) => {
     const [block, setBlock]= useState({}); // State for bloc-unblock field
@@ -35,7 +35,29 @@ const EmployeeCard = ({allEmployee, deleteHandler}) => {
 
     return (
         <div>
-            <table className="table">
+        <Row>
+            {new Array(1).fill(0).map((_, index) => {
+            const key = `col-${index}`;
+            return (
+                <Col
+                key={key}
+                xs={{
+                    flex: '100%',
+                }}
+                sm={{
+                    flex: '50%',
+                }}
+                md={{
+                    flex: '40%',
+                }}
+                lg={{
+                    flex: '20%',
+                }}
+                xl={{
+                    flex: '10%',
+                }}
+                >
+                <table className="table">
                 <thead>
                     <tr>
                     <th scope="col">Serial</th>
@@ -64,6 +86,11 @@ const EmployeeCard = ({allEmployee, deleteHandler}) => {
                 ))}
                 </tbody>
                 </table>
+                </Col>
+            );
+            })}
+        </Row>
+            
         </div>
     );
 };
