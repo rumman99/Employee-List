@@ -32,7 +32,7 @@ const UpdateEmployee = ({updateHandler}) => {
     useEffect(()=>{
         const fetching = (async()=>{
             try{
-                const response= await axios.get(`http://localhost:3333/employee/${id}`)
+                const response= await axios.get(`https://employee-list-production.up.railway.app/employee/${id}`)
                 const { firstName, lastName, email, phone } = response.data;
                 form.setFieldsValue({ firstName, lastName, email, phone });
             }

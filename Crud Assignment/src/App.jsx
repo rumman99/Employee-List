@@ -18,7 +18,7 @@ function App() {
     // Post Data to Json-Server Database //
     const fetching= (async ()=>{
       try{
-        const response = await axios.post('http://localhost:3333/employee', {id: uuidv4(), ...values})
+        const response = await axios.post('https://employee-list-production.up.railway.app/employee', {id: uuidv4(), ...values})
         setAllEmployee([...allEmployee, response.data]);
           // Alert Style
           toast.success("Added Successfully",{position: "top-right",
@@ -39,7 +39,7 @@ function App() {
 
 // Delete Button Handler //
   const deleteHandler=(id)=>{
-    axios.delete(`http://localhost:3333/employee/${id}`)
+    axios.delete(`https://employee-list-production.up.railway.app/employee/${id}`)
     const exceptDeleteItem= allEmployee.filter(item => item.id !== id);
     setAllEmployee(exceptDeleteItem);
       // Alert Style
@@ -58,7 +58,7 @@ function App() {
 const updateHandler =(employee)=>{
   const fetching = (async()=>{
     try{
-      const response = await axios.put(`http://localhost:3333/employee/${employee.id}`, employee)
+      const response = await axios.put(`https://employee-list-production.up.railway.app/employee/${employee.id}`, employee)
       const updatingEmployee= allEmployee.map(updateEmployee => (updateEmployee.id === response.data.id) ? response.data : updateEmployee)
       setAllEmployee(updatingEmployee);
     }
@@ -72,7 +72,7 @@ const updateHandler =(employee)=>{
   useEffect(()=>{
     const fetching = (async()=>{
       try{
-        const response = await axios.get('http://localhost:3333/employee');
+        const response = await axios.get('https://employee-list-production.up.railway.app/employee');
           setAllEmployee(response.data);
       }
       catch(err){
