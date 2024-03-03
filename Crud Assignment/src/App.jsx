@@ -2,38 +2,70 @@ import { useEffect, useState } from 'react';
 import './App.css'
 import AddEmployee from './components/AddEmployee/AddEmployee'
 import EmployeeList from './components/EmployeeList/EmployeeList'
-// import {uuid} from 'uuidv4';
 import { v4 as uuidv4 } from 'uuid';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import EmployeeDetails from './components/EmployeeDetails/EmployeeDetails';
+import { Bounce, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 
 function App() {
+  const navigate= useNavigate();
   const [allEmployee, setAllEmployee]= useState([]);
 
 // Submit Button Handler //
   const submitHandler=(values)=>{
-    // const previousData= [...allEmployee];
-    setAllEmployee([...allEmployee, {id: uuidv4(), ...values}]);
-  }
+    // Post Data to Json-Server Database //
+    const fetching= (async ()=>{
+      try{
+        const response = await axios.post('http://localhost:3333/employee', {id: uuidv4(), ...values})
+        setAllEmployee([...allEmployee, response.data]);
+          // Alert Style
+          toast.success("Added Successfully",{position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,});
+      }
+      catch(err){
+        console.log(err);
+      }
+    })() /* Self Invoke Function IIFE*/
+  };
 
 // Delete Button Handler //
   const deleteHandler=(id)=>{
+    axios.delete(`http://localhost:3333/employee/${id}`)
     const exceptDeleteItem= allEmployee.filter(item => item.id !== id);
     setAllEmployee(exceptDeleteItem);
-    alert('DELETED SUCCESSFULLY')
+      // Alert Style
+      toast.success("Deleted Successfully",{position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,});
   }
 
-// SetItem and GetItem to LocalStorage //
+// Get Data from Json-Server Database //
   useEffect(()=>{
-    const getLocalStorage= JSON.parse(localStorage.getItem('employee'));
-    if (getLocalStorage && getLocalStorage.length > 0){
-        setAllEmployee(getLocalStorage);
-    }
+    const fetching = (async()=>{
+      try{
+        const response = await axios.get('http://localhost:3333/employee');
+          setAllEmployee(response.data);
+      }
+      catch(err){
+        console.log(err);
+      }
+    })() /* Self Invoke Function IIFE*/
 }, [])
-
-  useEffect(()=>{
-      localStorage.setItem('employee', JSON.stringify(allEmployee));
-  }, [allEmployee])
 
 
   return (

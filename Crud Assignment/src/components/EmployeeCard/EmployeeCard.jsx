@@ -37,7 +37,7 @@ const EmployeeCard = ({allEmployee, deleteHandler}) => {
                     </tr>
                 </thead>
                 <tbody>
-                {allEmployee.map((employee, index) => (
+                {allEmployee && allEmployee.map((employee, index) => (
                     
                     <tr key={index}>
                     <th scope="row">{index+1}</th>
