@@ -9,19 +9,25 @@ import { Modal } from 'antd';
 
 const EmployeeCard = ({allEmployee, deleteHandler}) => {
     const [block, setBlock]= useState({}); // Block/Unblock State
+    const [deleteId, setDeleteId] = useState(null);
 
 // Delete Confirmation Modal //
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const showModal = () => {
+    const showModal = (id) => {
         setIsModalOpen(true);
+        setDeleteId(id);
     };
-    const handleOk = (id) => {
-        deleteHandler(id);
-        setIsModalOpen(false);
+    const handleOk = () => {
+        if (deleteId) {
+            deleteHandler(deleteId);
+            setIsModalOpen(false);
+            setDeleteId(null);
+        }
     };
     const handleCancel = () => {
         setIsModalOpen(false);
+        setDeleteId(null);
     };
 
 // Handle Block Unblock Toggle
@@ -45,7 +51,7 @@ const handleBlock = (id) => {
                     </tr>
                 </thead>
                 <tbody>
-                {allEmployee && allEmployee.map((employee, index) => (
+                {allEmployee.map((employee, index) => (
                     
                     <tr key={index}>
                     <th scope="row">{index+1}</th>
@@ -53,7 +59,7 @@ const handleBlock = (id) => {
                     <td className='detailsIcon'> 
                         <Link to={`/employee/${employee.id}`} state={employee}> <i><BiSolidDetail /></i> </Link>
                     </td>
-                    <td className='deleteIcon'><i onClick={showModal}><MdDeleteForever /></i></td>
+                    <td className='deleteIcon'><i onClick={()=>showModal(employee.id)}><MdDeleteForever /></i></td>
                     <Modal title="Delete Confirmation" open={isModalOpen} onOk={()=>handleOk(employee.id)} onCancel={handleCancel}>
                         <p style={{color:'red'}}>Do You Really Want To Delete This Employee Data?</p>
                     </Modal>
