@@ -5,10 +5,10 @@ import { BiSolidDetail } from "react-icons/bi";
 import { CgUnblock } from "react-icons/cg";
 import "./employeeCard.css"
 import { Link } from 'react-router-dom';
-import { Col, Modal, Row } from 'antd';
+import { Modal } from 'antd';
 
 const EmployeeCard = ({allEmployee, deleteHandler}) => {
-    const [block, setBlock]= useState({}); // State for bloc-unblock field
+    const [block, setBlock]= useState(false);
 
 // Delete Confirmation Modal //
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,47 +24,16 @@ const EmployeeCard = ({allEmployee, deleteHandler}) => {
         setIsModalOpen(false);
     };
 
-    // Handle Block Unblock Toggle
-    const handleBlock = (id) => {
-        setBlock(state => ({
-            ...state,
-            [id]: !state[id]
-        }));
-    }
-
-
     return (
         <div>
-        <Row>
-            {new Array(1).fill(0).map((_, index) => {
-            const key = `col-${index}`;
-            return (
-                <Col
-                key={key}
-                xs={{
-                    flex: '100%',
-                }}
-                sm={{
-                    flex: '50%',
-                }}
-                md={{
-                    flex: '40%',
-                }}
-                lg={{
-                    flex: '20%',
-                }}
-                xl={{
-                    flex: '10%',
-                }}
-                >
-                <table className="table">
+            <table className="table">
                 <thead>
                     <tr>
                     <th scope="col">Serial</th>
                     <th scope="col">Name</th>
                     <th className='iconHead' scope="col">DETAILS</th>
                     <th className='iconHead' scope="col">DELETE</th>
-                    <th className='iconHead' scope="col">Block/Unblock</th>
+                    <th className='iconHead' scope="col">{block ? 'UNBLOCK' : 'BLOCK'}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -80,17 +49,12 @@ const EmployeeCard = ({allEmployee, deleteHandler}) => {
                     <Modal title="Delete Confirmation" open={isModalOpen} onOk={()=>handleOk(employee.id)} onCancel={handleCancel}>
                         <p style={{color:'red'}}>Do You Really Want To Delete This Employee Data?</p>
                     </Modal>
-                    <td className='blockIcon'><i onClick={()=>handleBlock(employee.id)}>{block[employee.id] ? <p>UnBlock<CgUnblock /></p> : <p>Block<MdBlock /></p>}</i></td>
+                    <td className='blockIcon' onClick={()=>setBlock(!block)}>{block ? <CgUnblock /> : <MdBlock />}</td>
                     </tr>
 
                 ))}
                 </tbody>
                 </table>
-                </Col>
-            );
-            })}
-        </Row>
-            
         </div>
     );
 };
