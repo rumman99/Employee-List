@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "json-server -p 3333 employee-db.json",
+    "start": "json-server -p 3333 -w employee-db.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
