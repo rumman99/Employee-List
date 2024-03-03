@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { MdBlock } from "react-icons/md";
 import { MdDeleteForever } from "react-icons/md";
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { EditOutlined, RollbackOutlined } from '@ant-design/icons';
 import { CgUnblock } from "react-icons/cg";
 import { Button, Modal } from 'antd';
@@ -9,12 +9,10 @@ import axios from 'axios';
 
 
 const EmployeeDetails = ({deleteHandler}) => {
-    const [block, setBlock]= useState(false);
+    const [block, setBlock]= useState(false); // State for bloc-unblock field
     const [employeeDetails, setEmployeeDetails]= useState({});
     const {id}= useParams();
-    // const employeeDetails= useLocation();
     const navigate = useNavigate();
-    // const {firstName, lastName, email, phone, id}= employeeDetails.state;
     
     const handleCombinedClick = (id) => {
         deleteHandler(id);
@@ -48,6 +46,11 @@ const EmployeeDetails = ({deleteHandler}) => {
         setIsModalOpen(false);
     };
 
+// Handle Block Unblock Toggle
+    const handleBlock = () => {
+        setBlock(!block); // Toggle block state
+    };
+
     return (
         <div>
             <h2 style={{color:'green'}}>Details Info of {employeeDetails.firstName+' '+employeeDetails.lastName}</h2>
@@ -71,7 +74,7 @@ const EmployeeDetails = ({deleteHandler}) => {
                     <Modal title="Delete Confirmation" open={isModalOpen} onOk={()=>handleOk(id)} onCancel={handleCancel}>
                         <p style={{color:'red'}}>Do You Really Want To Delete This Employee Data?</p>
                     </Modal>
-                    <td className='blockIcon' onClick={()=>setBlock(!block)}>{block ? <CgUnblock /> : <MdBlock />}</td>
+                    <td className='blockIcon'><i onClick={handleBlock}>{block ? <p>UnBlock<CgUnblock /></p> : <p>Block<MdBlock /></p>}</i></td>
                     <td className='editIcon'><Link to={`/update/${id}`}><EditOutlined /></Link></td>
                     </tr>
                 </tbody>
