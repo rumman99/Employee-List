@@ -1,13 +1,17 @@
 import React from 'react';
 import { Button, Form, Input } from 'antd';
 import './addEmplyee.css'
-
+import { Link, useNavigate } from 'react-router-dom';
+import { RollbackOutlined } from '@ant-design/icons';
 
 const AddEmployee = ({submitHandler}) => {
+    const navigate = useNavigate();
+
     const [form] = Form.useForm();
     const onFinish = (values) => {
             submitHandler(values);
             form.resetFields();
+            navigate('/');
         };
             const onFinishFailed = (errorInfo) => {
             console.log('Failed:', errorInfo);
@@ -97,6 +101,7 @@ const AddEmployee = ({submitHandler}) => {
                 </Button>
                 </Form.Item>
             </Form>
+            <Link to='/' ><Button style={{marginTop:"100px"}} type="default" size='large' icon={<RollbackOutlined />}>Back</Button></Link>
         </div>
     );
 };

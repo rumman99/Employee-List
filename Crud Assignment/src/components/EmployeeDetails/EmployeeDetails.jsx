@@ -1,23 +1,31 @@
 import React, { useState } from 'react';
-import { MdDeleteForever } from "react-icons/md";
 import { MdBlock } from "react-icons/md";
-import { BiSolidDetail } from "react-icons/bi";
+import { MdDeleteForever } from "react-icons/md";
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { EditOutlined, RollbackOutlined } from '@ant-design/icons';
 import { CgUnblock } from "react-icons/cg";
-import "./employeeCard.css"
-import { Link } from 'react-router-dom';
-import { Modal } from 'antd';
+import { Button, Modal } from 'antd';
 
-const EmployeeCard = ({allEmployee, deleteHandler}) => {
+
+const EmployeeDetails = ({deleteHandler}) => {
     const [block, setBlock]= useState(false);
+    const employeeDetails= useLocation();
+    const navigate = useNavigate();
+    const {firstName, lastName, email, phone, id}= employeeDetails.state;
+    
+    const handleCombinedClick = (id) => {
+        deleteHandler(id);
+        navigate('/');
+    };
 
-// Delete Confirmation Modal //
+    // Delete Confirmation Modal //
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const showModal = () => {
         setIsModalOpen(true);
     };
     const handleOk = (id) => {
-        deleteHandler(id);
+        handleCombinedClick(id);
         setIsModalOpen(false);
     };
     const handleCancel = () => {
@@ -29,34 +37,31 @@ const EmployeeCard = ({allEmployee, deleteHandler}) => {
             <table className="table">
                 <thead>
                     <tr>
-                    <th scope="col">Serial</th>
                     <th scope="col">Name</th>
-                    <th className='iconHead' scope="col">DETAILS</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
                     <th className='iconHead' scope="col">DELETE</th>
                     <th className='iconHead' scope="col">{block ? 'UNBLOCK' : 'BLOCK'}</th>
+                    <th className='iconHead' scope="col">EDIT</th>
                     </tr>
                 </thead>
                 <tbody>
-                {allEmployee.map((employee, index) => (
-                    
-                    <tr key={index}>
-                    <th scope="row">{index+1}</th>
-                    <td>{employee.firstName+' '+employee.lastName}</td>
-                    <td className='detailsIcon'> 
-                        <Link to={`/employee/${employee.id}`} state={employee}> <i><BiSolidDetail /></i> </Link>
-                    </td>
+                    <tr>
+                    <td>{firstName+' '+lastName}</td>
+                    <td>{email}</td>
+                    <td>{phone}</td>
                     <td className='deleteIcon'><i onClick={showModal}><MdDeleteForever /></i></td>
-                    <Modal title="Delete Confirmation" open={isModalOpen} onOk={()=>handleOk(employee.id)} onCancel={handleCancel}>
+                    <Modal title="Delete Confirmation" open={isModalOpen} onOk={()=>handleOk(id)} onCancel={handleCancel}>
                         <p style={{color:'red'}}>Do You Really Want To Delete This Employee Data?</p>
                     </Modal>
                     <td className='blockIcon' onClick={()=>setBlock(!block)}>{block ? <CgUnblock /> : <MdBlock />}</td>
+                    <td className='editIcon'><EditOutlined /></td>
                     </tr>
-
-                ))}
                 </tbody>
                 </table>
+                <Link to='/' ><Button style={{marginTop:"100px"}} type="default" size='large' icon={<RollbackOutlined />}>Back</Button></Link>
         </div>
     );
 };
 
-export default EmployeeCard;
+export default EmployeeDetails;
