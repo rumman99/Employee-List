@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { Modal } from 'antd';
 
 const EmployeeCard = ({allEmployee, deleteHandler}) => {
-    const [block, setBlock]= useState(false);
+    const [block, setBlock]= useState({}); // Block/Unblock State
 
 // Delete Confirmation Modal //
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,6 +24,14 @@ const EmployeeCard = ({allEmployee, deleteHandler}) => {
         setIsModalOpen(false);
     };
 
+// Handle Block Unblock Toggle
+const handleBlock = (id) => {
+    setBlock(state => ({
+        ...state,
+        [id]: !state[id] // Toggle block state for specific employee id
+    }));
+};
+
     return (
         <div>
             <table className="table">
@@ -33,7 +41,7 @@ const EmployeeCard = ({allEmployee, deleteHandler}) => {
                     <th scope="col">Name</th>
                     <th className='iconHead' scope="col">DETAILS</th>
                     <th className='iconHead' scope="col">DELETE</th>
-                    <th className='iconHead' scope="col">{block ? 'UNBLOCK' : 'BLOCK'}</th>
+                    <th className='iconHead' scope="col">BLOCK/UNBLOCK</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,7 +57,7 @@ const EmployeeCard = ({allEmployee, deleteHandler}) => {
                     <Modal title="Delete Confirmation" open={isModalOpen} onOk={()=>handleOk(employee.id)} onCancel={handleCancel}>
                         <p style={{color:'red'}}>Do You Really Want To Delete This Employee Data?</p>
                     </Modal>
-                    <td className='blockIcon' onClick={()=>setBlock(!block)}>{block ? <CgUnblock /> : <MdBlock />}</td>
+                    <td className='blockIcon'> <i onClick={()=>handleBlock(employee.id)}> {block[employee.id] ? <p>UnBlock <CgUnblock /></p> : <p>Block <MdBlock /></p>}</i></td>
                     </tr>
 
                 ))}

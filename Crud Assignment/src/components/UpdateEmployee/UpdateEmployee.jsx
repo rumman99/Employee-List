@@ -33,8 +33,8 @@ const UpdateEmployee = ({updateHandler}) => {
         const fetching = (async()=>{
             try{
                 const response= await axios.get(`https://employee-list-production.up.railway.app/employee/${id}`)
-                const { firstName, lastName, email, phone } = response.data;
-                form.setFieldsValue({ firstName, lastName, email, phone });
+                const { firstName, lastName, phone } = response.data;
+                form.setFieldsValue({ firstName, lastName, phone });
             }
             catch(err){
                 console.log(err);
@@ -83,19 +83,6 @@ const UpdateEmployee = ({updateHandler}) => {
                     {
                     required: true,
                     message: 'Please input your lastName!',
-                    },
-                ]}
-                >
-                <Input />
-                </Form.Item>
-
-                <Form.Item
-                label="Email"
-                name="email"
-                rules={[
-                    {
-                    required: true,
-                    message: 'Please input your email!',
                     },
                 ]}
                 >

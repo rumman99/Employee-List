@@ -58,7 +58,7 @@ function App() {
 const updateHandler =(employee)=>{
   const fetching = (async()=>{
     try{
-      const response = await axios.put(`https://employee-list-production.up.railway.app/employee/${employee.id}`, employee)
+      const response = await axios.patch(`https://employee-list-production.up.railway.app/employee/${employee.id}`, employee)
       const updatingEmployee= allEmployee.map(updateEmployee => (updateEmployee.id === response.data.id) ? response.data : updateEmployee)
       setAllEmployee(updatingEmployee);
     }
