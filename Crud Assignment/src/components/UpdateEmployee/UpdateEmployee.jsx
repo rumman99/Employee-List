@@ -1,23 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Form, Input } from 'antd';
-import './addEmplyee.css'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { RollbackOutlined } from '@ant-design/icons';
 import { Bounce, toast } from 'react-toastify';
+import axios from 'axios';
 
-const AddEmployee = ({submitHandler}) => {
+const UpdateEmployee = ({updateHandler}) => {
+    const {id}= useParams();
     const navigate = useNavigate();
 
     const [form] = Form.useForm();
     const onFinish = (values) => {
-            submitHandler(values);
+            updateHandler({id: id, ...values});
             form.resetFields();
             navigate('/');
         };
             const onFinishFailed = (errorInfo) => {
             console.log('Failed:', errorInfo);
                 // Alert Style
-                toast.error("Input Can't be Blank!",{position: "top-right",
+                toast.error("Updated Successfully",{position: "top-right",
                 autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
@@ -28,9 +29,22 @@ const AddEmployee = ({submitHandler}) => {
                 transition: Bounce,});
         }
 
+    useEffect(()=>{
+        const fetching = (async()=>{
+            try{
+                const response= await axios.get(`http://localhost:3333/employee/${id}`)
+                const { firstName, lastName, email, phone } = response.data;
+                form.setFieldsValue({ firstName, lastName, email, phone });
+            }
+            catch(err){
+                console.log(err);
+            }
+        })()
+    },[])
 
     return (
         <div>
+            <h2 style={{color:'yellow'}}>Edit Employee Details</h2>
             <Form form={form}
                 name="basic"
                 labelCol={{
@@ -108,7 +122,7 @@ const AddEmployee = ({submitHandler}) => {
                 }}
                 >
                 <Button type="primary" htmlType="submit">
-                    Submit
+                    Update
                 </Button>
                 </Form.Item>
             </Form>
@@ -117,4 +131,4 @@ const AddEmployee = ({submitHandler}) => {
     );
 };
 
-export default AddEmployee;
+export default UpdateEmployee;

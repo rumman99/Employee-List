@@ -72,7 +72,7 @@ const EmployeeDetails = ({deleteHandler}) => {
                         <p style={{color:'red'}}>Do You Really Want To Delete This Employee Data?</p>
                     </Modal>
                     <td className='blockIcon' onClick={()=>setBlock(!block)}>{block ? <CgUnblock /> : <MdBlock />}</td>
-                    <td className='editIcon'><EditOutlined /></td>
+                    <td className='editIcon'><Link to={`/update/${id}`}><EditOutlined /></Link></td>
                     </tr>
                 </tbody>
                 </table>

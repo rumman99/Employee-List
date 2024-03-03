@@ -3,14 +3,14 @@ import './App.css'
 import AddEmployee from './components/AddEmployee/AddEmployee'
 import EmployeeList from './components/EmployeeList/EmployeeList'
 import { v4 as uuidv4 } from 'uuid';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import EmployeeDetails from './components/EmployeeDetails/EmployeeDetails';
 import { Bounce, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+import UpdateEmployee from './components/UpdateEmployee/UpdateEmployee';
 
 function App() {
-  const navigate= useNavigate();
   const [allEmployee, setAllEmployee]= useState([]);
 
 // Submit Button Handler //
@@ -54,6 +54,20 @@ function App() {
       transition: Bounce,});
   }
 
+// Update Handler //
+const updateHandler =(employee)=>{
+  const fetching = (async()=>{
+    try{
+      const response = await axios.put(`http://localhost:3333/employee/${employee.id}`, employee)
+      const updatingEmployee= allEmployee.map(updateEmployee => (updateEmployee.id === response.data.id) ? response.data : updateEmployee)
+      setAllEmployee(updatingEmployee);
+    }
+    catch(err){
+      console.log(err);
+    }
+  })()
+}
+
 // Get Data from Json-Server Database //
   useEffect(()=>{
     const fetching = (async()=>{
@@ -74,6 +88,7 @@ function App() {
         <Route path='/' element={<EmployeeList allEmployee={allEmployee} deleteHandler={deleteHandler} />}/>
         <Route path='add-employee' element={<AddEmployee allEmployee={allEmployee} setAllEmployee={setAllEmployee} submitHandler={submitHandler} />}/>
         <Route path='/employee/:id' element={<EmployeeDetails deleteHandler={deleteHandler}/>} />
+        <Route path='/update/:id' element={<UpdateEmployee updateHandler={updateHandler}/>} />
       </Routes>
     </>
   )
