@@ -40,35 +40,30 @@ const handleBlock = (id) => {
 
     return (
         <div>
-            <table className="table">
-                <thead>
-                    <tr>
-                    <th scope="col">Serial</th>
-                    <th scope="col">Name</th>
-                    <th className='iconHead' scope="col">DETAILS</th>
-                    <th className='iconHead' scope="col">DELETE</th>
-                    <th className='iconHead' scope="col">BLOCK/UNBLOCK</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {allEmployee.map((employee, index) => (
-                    
-                    <tr key={index}>
-                    <th scope="row">{index+1}</th>
-                    <td>{employee.firstName+' '+employee.lastName}</td>
-                    <td className='detailsIcon'> 
-                        <Link to={`/employee/${employee.id}`} state={employee}> <i><BiSolidDetail /></i> </Link>
-                    </td>
-                    <td className='deleteIcon'><i onClick={()=>showModal(employee.id)}><MdDeleteForever /></i></td>
-                    <Modal title="Delete Confirmation" open={isModalOpen} onOk={()=>handleOk(employee.id)} onCancel={handleCancel}>
-                        <p style={{color:'red'}}>Do You Really Want To Delete This Employee Data?</p>
-                    </Modal>
-                    <td className='blockIcon'> <i onClick={()=>handleBlock(employee.id)}> {block[employee.id] ? <p>UnBlock <CgUnblock /></p> : <p>Block <MdBlock /></p>}</i></td>
-                    </tr>
+            {allEmployee.map((employee, index) => (
 
+                    <div key={index} className='table'>
+                        <div className='table-row'>
+                        <div className='info'>
+                            <div className="row">{index+1}.</div>
+                            <div className="row">{employee.firstName+' '+employee.lastName}</div>
+                        </div>
+                        
+                        <div className='icons-container'>
+                            <div className='icons'>
+                            <div className='detailsIcon'> 
+                                <Link to={`/employee/${employee.id}`} state={employee}> <i><BiSolidDetail /></i> </Link>
+                            </div>
+                            <div className='deleteIcon'><i onClick={()=>showModal(employee.id)}><MdDeleteForever /></i></div>
+                            <Modal title="Delete Confirmation" open={isModalOpen} onOk={()=>handleOk(employee.id)} onCancel={handleCancel}>
+                                <p style={{color:'red'}}>Do You Really Want To Delete This Employee Data?</p>
+                            </Modal>
+                            <div className='blockIcon'> <i onClick={()=>handleBlock(employee.id)}> {block[employee.id] ? <span>UnBlock <CgUnblock /></span> : <span>Block <MdBlock /></span>}</i></div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
                 ))}
-                </tbody>
-                </table>
         </div>
     );
 };

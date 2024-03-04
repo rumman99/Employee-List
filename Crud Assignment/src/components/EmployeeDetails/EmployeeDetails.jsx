@@ -6,6 +6,7 @@ import { EditOutlined, RollbackOutlined } from '@ant-design/icons';
 import { CgUnblock } from "react-icons/cg";
 import { Button, Modal } from 'antd';
 import axios from 'axios';
+import "./employeeDetails.css"
 
 
 const EmployeeDetails = ({deleteHandler}) => {
@@ -53,32 +54,33 @@ const EmployeeDetails = ({deleteHandler}) => {
 
     return (
         <div>
-            <h2 style={{color:'green'}}>Details Info of {employeeDetails.firstName+' '+employeeDetails.lastName}</h2>
-            <table className="table">
-                <thead>
-                    <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Phone</th>
-                    <th className='iconHead' scope="col">DELETE</th>
-                    <th className='iconHead' scope="col">{block ? 'UNBLOCK' : 'BLOCK'}</th>
-                    <th className='iconHead' scope="col">EDIT</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    <td>{employeeDetails.firstName+' '+employeeDetails.lastName}</td>
-                    <td>{employeeDetails.email}</td>
-                    <td>{employeeDetails.phone}</td>
-                    <td className='deleteIcon'><i onClick={showModal}><MdDeleteForever /></i></td>
-                    <Modal title="Delete Confirmation" open={isModalOpen} onOk={()=>handleOk(id)} onCancel={handleCancel}>
-                        <p style={{color:'red'}}>Do You Really Want To Delete This Employee Data?</p>
-                    </Modal>
-                    <td className='blockIcon'><i onClick={handleBlock}>{block ? <p>UnBlock<CgUnblock /></p> : <p>Block<MdBlock /></p>}</i></td>
-                    <td className='editIcon'><Link to={`/update/${id}`}><EditOutlined /></Link></td>
-                    </tr>
-                </tbody>
-                </table>
+            <h2 style={{color:'green', marginTop:'150px'}}>Details Info of {employeeDetails.firstName+' '+employeeDetails.lastName}</h2>
+                <div className='table2'>
+                    <div className='table-row2'>
+                    <div className='info2'>
+                        <div className="row2">{employeeDetails.firstName+' '+employeeDetails.lastName}</div>
+                        <div className="row2">{employeeDetails.email}</div>
+                        <div className="row2">{employeeDetails.phone}</div>
+                    </div>
+                    
+                    <div className='icons-container2'>
+                        <div className='icons2'>
+                            <div className='deleteIcon2'><i onClick={showModal}><MdDeleteForever /></i></div>
+                            <Modal title="Delete Confirmation" open={isModalOpen} onOk={()=>handleOk(id)} onCancel={handleCancel}>
+                                <p style={{color:'red'}}>Do You Really Want To Delete This Employee Data?</p>
+                            </Modal>
+                            <div className='blockIcon2'><i onClick={handleBlock}>{block ? <span>UnBlock<CgUnblock /></span> : <span>Block<MdBlock /></span>}</i>
+                            </div>
+                            <div className='editIcon2'><Link to={`/update/${id}`}><i><EditOutlined /></i></Link>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+
+
+
                 <Link to='/' ><Button style={{marginTop:"100px"}} type="default" size='large' icon={<RollbackOutlined />}>Back</Button></Link>
         </div>
     );

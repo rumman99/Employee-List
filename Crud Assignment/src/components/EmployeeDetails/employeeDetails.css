@@ -1,0 +1,213 @@
+.table2 {
+border-radius: 12px;
+align-items: center;
+}
+
+.table-row2{
+box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+display: flex;
+justify-content: space-between;
+align-items: center;
+background: white;
+border-radius: 4px;
+display: flex;
+justify-content: space-between;
+margin-bottom: 1.5rem;
+padding: 1rem;
+}
+
+.icons-container2 {
+flex-grow: 1;
+display: flex;
+justify-content: flex-end;
+}
+
+.icons2 {
+display: flex;
+gap: 10px;
+margin-top: 5px;
+}
+
+.deleteIcon2, .editIcon2, .blockIcon2{
+padding: 0px 10px;
+}
+
+i{
+color: black;
+}
+
+i :hover {
+color: #1677ff;
+cursor: pointer;
+transform: scale(1.1);
+-webkit-transform: scale(1.1);
+-moz-transform: scale(1.1);
+-ms-transform: scale(1.1);
+-o-transform: scale(1.1);
+}
+
+.info2 {
+display: flex;
+justify-content: center;
+}
+
+.row2 {
+padding: 0px 10px;
+margin: 0px 10px;
+}
+
+.blockIcon2 span {
+display: flex;
+}
+
+@media only screen and (min-width: 161px) {
+    .table-row2 {
+        margin: 0px 0px;
+        text-align: left;
+        font-size: 10px;
+    }
+    .deleteIcon2, .editIcon2, .blockIcon2{
+        padding: 0px;
+        font-size: 8px;
+        }
+    .info2{
+        display: inline;
+        line-height: 2;
+    }
+    .icons2{
+        gap: 2;
+    }
+}
+
+@media only screen and (min-width: 261px) {
+    .table-row2 {
+        margin: 0px 0px;
+        text-align: left;
+        font-size: 10px;
+    }
+    .deleteIcon2, .editIcon2, .blockIcon2{
+        padding: 0px;
+        font-size: 8px;
+        }
+    .info2{
+        display: inline;
+        line-height: 2;
+    }
+    .icons2{
+        gap: 2;
+    }
+}
+
+@media only screen and (min-width: 361px) {
+    .table-row2 {
+        margin: 0px 0px;
+        text-align: left;
+        font-size: 10px;
+    }
+    .deleteIcon2, .editIcon2, .blockIcon2{
+        padding: 0px;
+        font-size: 8px;
+        }
+    .info2{
+        display: inline;
+        line-height: 2;
+    }
+    .icons2{
+        gap: 2;
+    }
+}
+
+@media only screen and (min-width: 461px) {
+.table-row2 {
+    margin: 0px 0px;
+    text-align: left;
+    font-size: 10px;
+}
+.deleteIcon2, .editIcon2, .blockIcon2{
+    padding: 0px 0px;
+    }
+.info2{
+    display: flex;
+    justify-content: center;
+    line-height: 2;
+}
+}
+
+@media only screen and (min-width: 561px) {
+.table-row2 {
+    margin: 30px 0px;
+    text-align: left;
+    font-size: 10px;
+}
+}
+
+
+@media only screen and (min-width: 661px) {
+.table-row2 {
+    margin: 30px 0px;
+    text-align: left;
+    font-size: 14px;
+}
+}
+
+@media only screen and (min-width: 861px) {
+.table-row2 {
+    margin: 30px 50px;
+    text-align: left;
+}
+}
+
+@media only screen and (min-width: 962px) {
+.table-row2 {
+    margin: 30px 100px;
+}
+}
+
+@media only screen and (min-width: 1162px) {
+.table-row2 {
+    margin: 30px 200px;
+}
+}
+
+@media only screen and (min-width: 1262px) {
+.table-row2 {
+    margin: 30px 250px;
+}
+}
+
+@media only screen and (min-width: 1362px) {
+.table-row2 {
+    margin: 30px 300px;
+}
+}
+
+@media only screen and (min-width: 1462px) {
+.table-row2 {
+    margin: 30px 350px;
+}
+}
+
+@media only screen and (min-width: 1562px) {
+.table-row2 {
+    margin: 30px 400px;
+}
+}
+
+@media only screen and (min-width: 1662px) {
+.table-row2 {
+    margin: 30px 400px;
+}
+}
+
+@media only screen and (min-width: 1762px) {
+.table-row2 {
+    margin: 30px 450px;
+    font-size: 18px;
+}
+.deleteIcon2, .editIcon2{
+    font-size: 18px;
+}
+.blockIcon2{
+    font-size: 15px;
+}
+}

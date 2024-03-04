@@ -4,6 +4,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { RollbackOutlined } from '@ant-design/icons';
 import { Bounce, toast } from 'react-toastify';
 import axios from 'axios';
+import './updateEmployee.css'
 
 const UpdateEmployee = ({updateHandler}) => {
     const {id}= useParams();
@@ -43,8 +44,9 @@ const UpdateEmployee = ({updateHandler}) => {
     },[])
 
     return (
-        <div>
-            <h2 style={{color:'yellow'}}>Edit Employee Details</h2>
+        <>
+            <h2 style={{color:'blue', marginTop:'100px'}}>Edit Employee Details</h2>
+            <div className='input-style'>
             <Form form={form}
                 name="basic"
                 labelCol={{
@@ -113,8 +115,9 @@ const UpdateEmployee = ({updateHandler}) => {
                 </Button>
                 </Form.Item>
             </Form>
+            </div>
             <Link to='/' ><Button style={{marginTop:"100px"}} type="default" size='large' icon={<RollbackOutlined />}>Back</Button></Link>
-        </div>
+        </>
     );
 };
 

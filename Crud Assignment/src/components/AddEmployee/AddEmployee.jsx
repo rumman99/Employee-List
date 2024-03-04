@@ -30,7 +30,9 @@ const AddEmployee = ({submitHandler}) => {
 
 
     return (
-        <div>
+        <>
+        <h2 style={{marginTop:'100px'}}>Add Employee</h2>
+        <div className='input-style'>
             <Form form={form}
                 name="basic"
                 labelCol={{
@@ -112,8 +114,9 @@ const AddEmployee = ({submitHandler}) => {
                 </Button>
                 </Form.Item>
             </Form>
-            <Link to='/' ><Button style={{marginTop:"100px"}} type="default" size='large' icon={<RollbackOutlined />}>Back</Button></Link>
-        </div>
+            </div>
+            <Link to='/' ><Button style={{marginTop:"50px"}} type="default" size='large' icon={<RollbackOutlined />}>Back</Button></Link>
+        </>
     );
 };
 
