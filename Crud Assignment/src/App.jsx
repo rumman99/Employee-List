@@ -61,6 +61,16 @@ const updateHandler =(employee)=>{
       const response = await axios.patch(`https://employee-list-production.up.railway.app/employee/${employee.id}`, employee)
       const updatingEmployee= allEmployee.map(updateEmployee => (updateEmployee.id === response.data.id) ? response.data : updateEmployee)
       setAllEmployee(updatingEmployee);
+      // Alert Style
+      toast.info("Update Successfully",{position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      transition: Bounce,});
     }
     catch(err){
       console.log(err);
