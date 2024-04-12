@@ -23,7 +23,7 @@ const EmployeeDetails = ({deleteHandler}) => {
     useEffect(()=>{
         const fetching =(async()=>{
             try{
-                const response = await axios.get(`https://employee-list-production.up.railway.app/employee/${id}`)
+                const response = await axios.get(`https://employee-list-07aa.onrender.com/employee/${id}`)
                 setEmployeeDetails(response.data);
             }
             catch(err){
